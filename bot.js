@@ -62,14 +62,18 @@ bot.on('message',(message)=>{
   if (message.text===hotelListButton) {
     buttonTouched=true;
     earlierAction=hotelListButton;
-    axios({
+    try{
+      axios({
       method: 'get',
-      url: API_URL+'hotel'
+      url:  "https://ethio-station-api.herokuapp.com/api/hotel"
     }).then((response) => {
         bot.sendMessage(message.chat.id, response);
-      }, (error) => {
-        console.log(error);
+      }, (err) => {
+        console.log(err);
     });
+  }catch(error){
+    console.log(error);
+  }
     
     return;
   }  
