@@ -18,8 +18,8 @@ var earlierAction="";
 var choosenHotelTobeBooked="";
 var pic;
 var hotelList;
-const bookHotelButton = "Get List of hotel";
-const hotelListButton = "Book hotel";  
+const bookHotelButton = "Book hotel";
+const hotelListButton = "Get List of hotel";  
 const hikingButton = "Get List of Hiking events";  
 const requestTourButton = "Request a tour guide";  
 const getResturant = "Check resturant";
@@ -53,9 +53,10 @@ bot.on('message',(message)=>{
         break;
       case uploadPicButton:
         pic=message.photo[1].file_id; 
-        buttonTouched=false;
+        
         break;
     }
+    buttonTouched=false;
     return;
   }
   if (message.text===hotelListButton) {
