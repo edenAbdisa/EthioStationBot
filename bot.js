@@ -20,13 +20,13 @@ var earlierAction="";
 var choosenHotelTobeBooked="";
 var pic;
 
-var bookHotelButton = "Get List of hotel";
-var hotelListButton = "Get List of hotel";  
-var hikingButton = "Get List of Hiking events";  
-var requestTourButton = "Request a tour guide";  
-var getResturant = "Check resturant";
-var done = "Done";
-var uploadPicButton="Upload Picture";
+const bookHotelButton = "Get List of hotel";
+const hotelListButton = "Get List of hotel";  
+const hikingButton = "Get List of Hiking events";  
+const requestTourButton = "Request a tour guide";  
+const getResturant = "Check resturant";
+const done = "Done";
+const uploadPicButton="Upload Picture";
 var picmsg;
 var picture;
 
