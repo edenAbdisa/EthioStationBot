@@ -3,12 +3,11 @@ const axios = require('axios');
 const express = require('express')
 const bodyParser = require('body-parser');
 require('dotenv').config();
-
-const { Client } = require('pg');
+ 
 const token = process.env.TELEGRAM_TOKEN;
 let bot;
 
-
+ 
  
 if (process.env.NODE_ENV === 'production') {
    bot = new TelegramBot(token);
