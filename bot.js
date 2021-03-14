@@ -9,14 +9,7 @@ const token = process.env.TELEGRAM_TOKEN;
 let bot;
 
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
  
-client.connect();
-
-
 if (process.env.NODE_ENV === 'production') {
    bot = new TelegramBot(token);
    bot.setWebHook(process.env.HEROKU_URL + bot.token);
@@ -139,138 +132,7 @@ bot.on('message',(message)=>{
  });
 
 
-bot.on("callback_query", (callbackQuery) => {
-	 var heartLiked=0;
-	 var fireLiked=0;
-   const msg = callbackQuery.message;
-    const userId = callbackQuery.from.id; 
-    const action = callbackQuery.data;    
-    const msgId = callbackQuery.message.message_id;
-    
-  
-    /*client.query("SELECT * FROM PostRateNumber where postId = '"+ msgId.toString() +"' ;", (err, res) => {
-            if (err) throw err;            
-              var postRate =JSON.parse(JSON.stringify(res.rows[0])); 
-
-              heartLiked=parseInt(postRate.likenumber,10);
-              fireLiked=parseInt(postRate.firenumber,10); 
-        
-    });
-    if(action==="heart"){
-      client.query( "SELECT * FROM LikeTable where userId= '"+ userId.toString() +"' and postId = '"+ msgId.toString() +"' ;", (err, res) => {
-        if (err) throw err;
-        if (res.rowCount > 0){
-          client.query("Delete FROM LikeTable where userId='"+ userId.toString() +"' and postId = '"+ msgId.toString() +"' ;", (err, res) => {
-            if (err) throw err;
-             });
-            if(heartLiked>=1){
-              heartLiked--;
-              bot.editMessageReplyMarkup(   { inline_keyboard:  [
-                                                              [
-                                                                  {
-                                                                      text: `❤️  ${heartLiked}`,
-                                                                      callback_data: "heart"
-                                                                  },
-                                                                  {
-                                                                      text: `🔥 ${fireLiked}`,
-                                                                      callback_data: "fire"
-                                                                  }
-                                                              ]
-                                                            ]           
-   },{"message_id":callbackQuery.message.message_id,"chat_id": '@Trial_eth_school'});
-              client.query(`UPDATE PostRateNumber SET likeNumber = ${heartLiked} where postId = '`+ msgId.toString() +"';", (err, res) => {
-              if (err) throw err;            
-              });
-            }
-         
-        }
-        else {
-          client.query("Insert Into LikeTable (id,userId,postId) values ('"+userId.toString()+msgId.toString()+"', '"+userId.toString()+"', '"+msgId.toString()+"') ;", (err, res) => {
-            if (err) console.log( err);
-              });
-             heartLiked++;
-             bot.editMessageReplyMarkup(   { inline_keyboard:  [
-                                                              [
-                                                                  {
-                                                                      text: `❤️  ${heartLiked}`,
-                                                                      callback_data: "heart"
-                                                                  },
-                                                                  {
-                                                                      text: `🔥 ${fireLiked}`,
-                                                                      callback_data: "fire"
-                                                                  }
-                                                              ]
-                                                            ]           
-   },{"message_id":callbackQuery.message.message_id,"chat_id": '@Trial_eth_school'});
-            client.query(`UPDATE PostRateNumber SET likeNumber = ${heartLiked} where postId = '`+msgId.toString() +"' ;", (err, res) => {
-            if (err) throw err;            
-            });
-        
-        } 
-      }); 
-        
-    
-
-    
- 
-        
-    }else if(action==="fire"){
-    	client.query( "SELECT * FROM FireTable where userId= '"+ userId.toString() +"' and postId = '"+ msgId.toString() +"' ;", (err, res) => {
-        if (err) throw err;
-        if (res.rowCount > 0){
-          client.query("Delete FROM FireTable where userId='"+ userId.toString() +"' and postId = '"+ msgId.toString() +"' ;", (err, res) => {
-            if (err) throw err;            
-          });
-          if(fireLiked>=1){
-            fireLiked--;
-            bot.editMessageReplyMarkup(   { inline_keyboard:  [
-                                                              [
-                                                                  {
-                                                                      text: `❤️  ${heartLiked}`,
-                                                                      callback_data: "heart"
-                                                                  },
-                                                                  {
-                                                                      text: `🔥 ${fireLiked}`,
-                                                                      callback_data: "fire"
-                                                                  }
-                                                              ]
-                                                            ]           
-   },{"message_id":callbackQuery.message.message_id,"chat_id": '@Trial_eth_school'});
-            client.query(`UPDATE PostRateNumber SET fireNumber = ${fireLiked} where postId = '`+ msgId.toString() +"';", (err, res) => {
-              if (err) throw err;            
-            });
-          }
-        }
-        else {
-          client.query("Insert Into FireTable (id,userId,postId) values ('"+userId.toString()+msgId.toString()+"', '"+userId.toString()+"', '"+msgId.toString()+"') ;", (err, res) => {
-            if (err) throw err;
-          });
-          fireLiked++;          
-          bot.editMessageReplyMarkup(   { inline_keyboard:  [
-                                                              [
-                                                                  {
-                                                                      text: `❤️  ${heartLiked}`,
-                                                                      callback_data: "heart"
-                                                                  },
-                                                                  {
-                                                                      text: `🔥 ${fireLiked}`,
-                                                                      callback_data: "fire"
-                                                                  }
-                                                              ]
-                                                            ]           
-   },{"message_id":callbackQuery.message.message_id,"chat_id": '@Trial_eth_school'});
-          client.query(`UPDATE PostRateNumber SET fireNumber = ${fireLiked} where postId = '`+msgId.toString() +"' ;", (err, res) => {
-            if (err) throw err;            
-          });
-        } 
-      }); 
-        
-    }
-    
-   
-    }); */
-
-const app = express();
+ const app = express();
 
 app.use(bodyParser.json());
 
