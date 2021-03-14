@@ -5,7 +5,7 @@
   "main": "bot.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --max_old_space_size=2560 bot.js"
+    "start": "node --max_old_space_size=1279 bot.js"
   },
   "author": "Eden Abdisa",
   "license": "ISC",
