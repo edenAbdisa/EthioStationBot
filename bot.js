@@ -64,7 +64,7 @@ bot.on('message',(message)=>{
     earlierAction=hotelListButton;
     axios({
       method: 'get',
-      url: 'hotel'
+      url: API_URL+'hotel'
     }).then((response) => {
         bot.sendMessage(message.chat.id, response);
       }, (error) => {
