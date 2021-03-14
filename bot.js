@@ -6,7 +6,7 @@ require('dotenv').config();
 const API_URL="https://ethio-station-api.herokuapp.com/api/";
 const token = process.env.TELEGRAM_TOKEN;
 let bot;
-
+ node --max-old-space-size=4096 yourFile.js;
 if (process.env.NODE_ENV === 'production') {
    bot = new TelegramBot(token);
    bot.setWebHook(process.env.HEROKU_URL + bot.token);
