@@ -7,8 +7,6 @@ require('dotenv').config();
 const token = process.env.TELEGRAM_TOKEN;
 let bot;
 
- 
- 
 if (process.env.NODE_ENV === 'production') {
    bot = new TelegramBot(token);
    bot.setWebHook(process.env.HEROKU_URL + bot.token);
@@ -41,7 +39,7 @@ bot.on('message',(message)=>{
   	bot.sendMessage(message.chat.id, "Welcome ,Press the buttons to send the message that you want."
   		, {
   			"reply_markup": {
-    	                      "keyboard": [[$hotelListButton, $bookHotelButton],[$hikingButton], [$requestTourButton],[$getResturant],[$uploadPicButton],[$done]]
+    	                      "keyboard": [[hotelListButton, bookHotelButton],[hikingButton], [requestTourButton],[getResturant],[uploadPicButton],[done]]
           }
         });
   	return;
