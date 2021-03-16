@@ -23,6 +23,7 @@ const hotelListButton = "Get List of hotel";
 const hikingButton = "Get List of Hiking events";  
 const requestTourButton = "Request a tour guide";  
 const getResturant = "Check resturant";
+const contact = "Contact Us";
 const registerYourHikingEvent = "Register your hiking event";
 const done = "Done";
 const uploadPicButton="Upload your tour pictures";
@@ -40,7 +41,7 @@ bot.on('message',(message)=>{
   	bot.sendMessage(message.chat.id, "Welcome ,Press the buttons to send the message that you want."
   		, {
   			"reply_markup": {
-    	                      "keyboard": [[hotelListButton, bookHotelButton],[hikingButton, registerYourHikingEvent], [requestTourButton],[getResturant],[uploadPicButton],[done]]
+    	                      "keyboard": [[hotelListButton, bookHotelButton],[hikingButton, registerYourHikingEvent], [requestTourButton],[getResturant],[uploadPicButton],[contact],[done]]
           }
         });
   	return;
@@ -58,6 +59,9 @@ bot.on('message',(message)=>{
     }
     buttonTouched=false;
     return;
+  }
+  if(message.){
+      bit.sendMessage(message.chat.id,"Phone: ,Email: ");
   }
   if (message.text===hotelListButton) {
     buttonTouched=true;
