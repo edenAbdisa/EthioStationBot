@@ -41,8 +41,9 @@ bot.on('message',(message)=>{
   	bot.sendMessage(message.chat.id, "Welcome ,Press the buttons to send the message that you want."
   		, {
   			"reply_markup": {
-    	                      "keyboard": [[hotelListButton, bookHotelButton],[hikingButton, registerYourHikingEvent], [requestTourButton],[getResturant],[uploadPicButton],[contact],[done]]
-          }
+    	                      "keyboard": [[hotelListButton, bookHotelButton],[hikingButton, registerYourHikingEvent],
+                             [requestTourButton],[getResturant],[uploadPicButton],[contact],[done]]
+                        }
         });
   	return;
   }
@@ -60,7 +61,7 @@ bot.on('message',(message)=>{
     buttonTouched=false;
     return;
   }
-  if(message.){
+  if(message.text==contact){
       bit.sendMessage(message.chat.id,"Phone: ,Email: ");
   }
   if (message.text===hotelListButton) {
