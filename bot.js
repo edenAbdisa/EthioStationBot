@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'production') {
    bot = new TelegramBot(token);
    bot.setWebHook(process.env.HEROKU_URL + bot.token);
 } else {
-  
+
    bot = new TelegramBot(token, { polling: true });
 }
 var buttonTouched=false;
@@ -27,7 +27,7 @@ const getResturant = "Check resturant";
 const contact = "Contact Us";
 const registerYourHikingEvent = "Register your hiking event";
 const done = "Done";
-const uploadPicButton="Upload your tour pictures";
+const uploadPicButton="Upload your tour  pictures";
 var picmsg;
 var picture;
 
