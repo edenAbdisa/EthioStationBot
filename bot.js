@@ -119,7 +119,7 @@ bot.on('message',(message)=>{
             "inline_keyboard": [
                 [
                     {
-                        text: "❤️ 0",
+                        text: "❤️0",
                         callback_data: 'heart'
                     },
                     {
