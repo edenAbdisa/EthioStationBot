@@ -20,7 +20,7 @@ var choosenHotelTobeBooked="";
 var pic;
 var hotelList;
 const bookHotelButton = "Book hotel";
-const hotelListButton = "Get List of hotel";  
+const hotelListButton = "Get List  of hotel";  
 const hikingButton = "Get List of Hiking events";  
 const requestTourButton = "Request a tour guide";  
 const getResturant = "Check resturant";
