@@ -27,7 +27,7 @@ const getResturant = "Check resturant";
 const contact = "Contact Us";
 const registerYourHikingEvent = "Register your hiking event";
 const done = "Done";
-const uploadPicButton="Upload your tour  pictures";
+const uploadPicButton="Upload your tour pictures";
 var picmsg;
 var picture;
 
