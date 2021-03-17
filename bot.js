@@ -31,7 +31,7 @@ var picmsg;
 var picture;
 
 bot.on('message',(message)=>{
-	//const  message  = msg.text 
+  
   if(message.text===""){
   	bot.sendMessage(message.chat.id, "Message cant be empty send /start to start");
   	return;
