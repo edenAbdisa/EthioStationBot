@@ -6,13 +6,11 @@ require('dotenv').config();
 const API_URL="https://ethio-station-api.herokuapp.com/api/";
 const token = process.env.TELEGRAM_TOKEN;
 let bot;
-
 if (process.env.NODE_ENV === 'production') {
    bot = new TelegramBot(token);
    bot.setWebHook(process.env.HEROKU_URL + bot.token);
    bot.on("polling_error", (msg) => console.log(msg));
 } else {
-
    bot = new TelegramBot(token, { polling: true });
    bot.on("polling_error", (msg) => console.log(msg));
 }
@@ -36,7 +34,7 @@ var picture;
 bot.on('message',(message)=>{
   
   if(message.text===""){
-  	bot.sendMessage(message.chat.id, "Message cant be empty send /start to start");
+  	bot.sendMessage(message.chat.id, "Message cant be empty  send /start to start");
   	return;
   }
   if (message.text && message.text === "/start"){
