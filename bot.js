@@ -73,7 +73,7 @@ bot.on('message',(message)=>{
       method: 'get',
       url:  "https://ethio-station-api.herokuapp.com/api/hotel"
     }).then((response) => {
-        bot.sendMessage(message.chat.id, JSON.stringify(response));  
+        bot.sendMessage(message.chat.id,  response.toString());  
       }, (err) => {
         console.log(err);
     });
