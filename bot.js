@@ -63,7 +63,7 @@ bot.on('message',(message)=>{
     return;
   }
   if(message.text==contact){
-      bit.sendMessage(message.chat.id,"Phone: ,Email: ");
+      bot.sendMessage(message.chat.id,"Phone: ,Email: ");
   }
   if (message.text===hotelListButton) {
     buttonTouched=true;
