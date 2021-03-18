@@ -73,7 +73,7 @@ bot.on('message',(message)=>{
       method: 'get',
       url:  "https://ethio-station-api.herokuapp.com/api/hotel"
     }).then((response) => {
-        bot.sendMessage(message.chat.id, response);
+        bot.sendMessage(message.chat.id, JSON.stringify(response));  
       }, (err) => {
         console.log(err);
     });
@@ -88,7 +88,7 @@ bot.on('message',(message)=>{
     earlierAction=uploadPicButton;
     bot.sendMessage(message.chat.id,'Send your picture.', {
         "reply_markup": {
-                            "keyboard": [$done]
+                            "keyboard": [done]
           }
         });
     return;
