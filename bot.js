@@ -1,7 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
-const express = require('express')
-const bodyParser = require('body-parser');
+const express = require('express') 
 require('dotenv').config();
 const API_URL="https://ethio-station-api.herokuapp.com/api/";
 const token = process.env.TELEGRAM_TOKEN;
@@ -35,6 +34,40 @@ const contactustouched=()=>{
         "Phone: ,Email: "
   );
 }
+const getHotelList=()=>{
+      try{
+        axios({
+        method: 'get',
+        url:  "https://ethio-station-api.herokuapp.com/api/hotel"
+      }).then((response) => {
+          return response.toString();  
+        }, (err) => {
+          console.log(err);
+          return(err.toString());
+      });
+      }catch(error){
+      console.log(error);
+      return(err.toString());
+      }
+      return("No List found");
+}
+const getResturantList=()=>{
+    try{
+      axios({
+      method: 'get',
+      url:  "https://ethio-station-api.herokuapp.com/api/resturant"
+    }).then((response) => {
+      return response.toString();  
+      }, (err) => {
+        console.log(err);
+        return(err.toString());
+    });
+    }catch(error){
+    console.log(error);
+    return(err.toString());
+    }
+    return("No List found");
+}
 bot.on('message',(message)=>{
   
   if(message.text===""){
@@ -47,7 +80,7 @@ bot.on('message',(message)=>{
   		, {
   			"reply_markup": {
     	                      "keyboard": [[hotelListButton, bookHotelButton],[hikingButton, registerYourHikingEvent],
-                             [requestTourButton],[getResturant],[uploadPicButton],[contact],[done]]
+                             [requestTourButton],[getResturant],[uploadPicButton],[contact]]
                         }
         });
   	return;
@@ -68,23 +101,12 @@ bot.on('message',(message)=>{
   }
   if(message.text==contact){
       bot.sendMessage(message.chat.id,contactustouched());
+      return;
   }
   if (message.text===hotelListButton) {
     buttonTouched=true;
     earlierAction=hotelListButton;
-    try{
-      axios({
-      method: 'get',
-      url:  "https://ethio-station-api.herokuapp.com/api/hotel"
-    }).then((response) => {
-        bot.sendMessage(message.chat.id,  response.toString());  
-      }, (err) => {
-        console.log(err);
-    });
-  }catch(error){
-    console.log(error);
-  }
-    
+    bot.sendMessage(message.chat.id, getHotelList());  
     return;
   }  
   if (message.text===uploadPicButton) {
@@ -92,12 +114,12 @@ bot.on('message',(message)=>{
     earlierAction=uploadPicButton;
     bot.sendMessage(message.chat.id,'Send your picture.', {
         "reply_markup": {
-                            "keyboard": [done]
+                            "keyboard": ["caption",[done]]
           }
         });
     return;
   }
-   if (message.text===bookHotelButton) {
+  if (message.text===bookHotelButton) {
     buttonTouched=true;
     earlierAction=bookHotelButton;
     bot.sendMessage(message.chat.id,'Choose hotel from the list bellow');
@@ -113,7 +135,7 @@ bot.on('message',(message)=>{
  if (message.text===getResturant) {
     buttonTouched=true;
     earlierAction=getResturant;
-    bot.sendMessage(message.chat.id,'Here is the resturant list');
+    bot.sendMessage(message.chat.id,getResturantList());
     return;
   }
 
@@ -152,10 +174,9 @@ bot.on('message',(message)=>{
 
  });
 
-
+ 
  const app = express();
-
-app.use(bodyParser.json());
+ app.use(express.json());
 
 app.listen(process.env.PORT);
 
