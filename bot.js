@@ -1,5 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
-const axios = require('axios').default; 
+const axios = require('axios') ; 
 const express = require('express'); 
 const { response } = require('express');
 require('dotenv').config();
