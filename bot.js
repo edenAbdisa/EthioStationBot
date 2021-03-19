@@ -36,20 +36,21 @@ const contactustouched=()=>{
   );
 }
 const getHotelList=()=>{
-      var res="1"
+      var res="1";
       try{
         axios({
         method: 'get',
         url:  "https://ethio-station-api.herokuapp.com/api/hotel"
-      }).then((response) => {
-          res= "2"  
-        }, (err) => {
+      }).then(response => {
+          res= "2"  ;
+        })
+        .catch((err) => {
           console.log(err);
-          res="3"
+          res="3";
       });
       }catch(error){
          console.log(error);
-         res="4"
+         res="4";
       }
       return(res);
 }
