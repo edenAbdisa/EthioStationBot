@@ -30,7 +30,11 @@ const done = "Done";
 const uploadPicButton="Upload your tour pictures";
 var picmsg;
 var picture;
-
+const contactustouched=()=>{
+  return(
+        "Phone: ,Email: "
+  );
+}
 bot.on('message',(message)=>{
   
   if(message.text===""){
@@ -63,7 +67,7 @@ bot.on('message',(message)=>{
     return;
   }
   if(message.text==contact){
-      bot.sendMessage(message.chat.id,"Phone: ,Email: ");
+      bot.sendMessage(message.chat.id,contactustouched());
   }
   if (message.text===hotelListButton) {
     buttonTouched=true;
