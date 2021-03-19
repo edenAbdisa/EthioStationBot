@@ -1,6 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
-const express = require('express') 
+const express = require('express'); 
+const { response } = require('express');
 require('dotenv').config();
 const API_URL="https://ethio-station-api.herokuapp.com/api/";
 const token = process.env.TELEGRAM_TOKEN;
@@ -35,21 +36,22 @@ const contactustouched=()=>{
   );
 }
 const getHotelList=()=>{
+      var res=""
       try{
         axios({
         method: 'get',
         url:  "https://ethio-station-api.herokuapp.com/api/hotel"
       }).then((response) => {
-          return response.toString();  
+          res= response.toString();  
         }, (err) => {
           console.log(err);
-          return(err.toString());
+          res=err.toString();
       });
       }catch(error){
-      console.log(error);
-      return(err.toString());
+         console.log(error);
+         res=error.toString();
       }
-      return("No List found");
+      return(res);
 }
 const getResturantList=()=>{
     try{
