@@ -1,5 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
-const axios = require('axios'); 
+const axios = require('axios').default; 
 const express = require('express'); 
 const { response } = require('express');
 require('dotenv').config();
@@ -38,10 +38,10 @@ const contactustouched=()=>{
 const getHotelList=()=>{
       var res="1";
       axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
-      then(response => {
-        res= "2"  ;
+      then(response,{
+        res= "2"  
       })
-      .catch((err) => {
+      .catch((err)=> {
         console.log(err);
         res="3";
       }); 
