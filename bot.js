@@ -35,7 +35,7 @@ async function contactustouched(){
   await axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {
     console.log(response);
-    return JSON.parse(response).data[0];
+    return JSON.parse(response).data.toString();
      
   })
   .catch((err) => {
@@ -48,7 +48,7 @@ async function contactustouched(){
       axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
       then(function(response) {
         console.log(response);
-        return JSON.stringify(JSON.parse(response).data);
+        return JSON.stringify(JSON.parse(response).data[0]);
          
       })
       .catch(function(err) {
