@@ -48,7 +48,7 @@ async function contactustouched(){
       axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
       then(function(response) {
         console.log(response);
-        return response.data.toString();
+        return response.data[0].name;
          
       })
       .catch(function(err) {
