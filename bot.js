@@ -106,13 +106,13 @@ bot.on('message',(message)=>{
     return;
   }
   if(message.text==contact){
-      bot.sendMessage(message.chat.id, axios.get("https://ethio-station-api.herokuapp.com/api/hotel").then(response => response.data));
+      bot.sendMessage(message.chat.id,await axios.get("https://ethio-station-api.herokuapp.com/api/hotel").then(response => response.statusText));
       return;
   }
   if (message.text===hotelListButton) {
     buttonTouched=true;
     earlierAction=hotelListButton;
-    bot.sendMessage(message.chat.id, getHotelList());  
+    bot.sendMessage(message.chat.id,axios.get("https://ethio-station-api.herokuapp.com/api/hotel").then(response => response.statusText));  
     return;
   }  
   if (message.text===uploadPicButton) {
