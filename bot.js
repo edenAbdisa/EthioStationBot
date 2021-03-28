@@ -6,9 +6,6 @@ require('dotenv').config();
 const API_URL="https://ethio-station-api.herokuapp.com/api/";
 const token = process.env.TELEGRAM_TOKEN;
 let bot;
-const ex = express();
- ex.use(express.json());
-
 if (process.env.NODE_ENV === 'production') {
    bot = new TelegramBot(token);
    bot.setWebHook(process.env.HEROKU_URL + bot.token);
@@ -33,14 +30,11 @@ const done = "Done";
 const uploadPicButton="Upload your tour pictures";
 var picmsg;
 var picture;
-async function contactustouched(){
+function contactustouched(){
   var res="0";
-  await axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
-  then(response => { 
-    res=response.statusText;
-    console.log(response.data);
-     JSON.parse(response).statusText ;
-     
+  axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
+  then(response => {  
+    bot.sendMessage(message.chat.id,response.data);
   })
   .catch((err) => {
     console.log(err);
@@ -51,9 +45,8 @@ async function contactustouched(){
  getHotelList=()=>{
       var res="1";
       axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
-      then(function(response) { 
-        return JSON.stringify(JSON.parse(response.statusText) );
-         
+      then(function(response) {  
+        bot.sendMessage(message.chat.id,response.statusText);
       })
       .catch(function(err) {
         console.log(err);
@@ -109,13 +102,13 @@ bot.on('message',(message)=>{
     return;
   }
   if(message.text==contact){
-      bot.sendMessage(message.chat.id,ex.get("https://ethio-station-api.herokuapp.com/api/hotel",(req,res) => req));
+      contactustouched();
       return;
   }
   if (message.text===hotelListButton) {
     buttonTouched=true;
     earlierAction=hotelListButton;
-    bot.sendMessage(message.chat.id,"kkkkkk");  
+    getHotelList(); 
     return;
   }  
   if (message.text===uploadPicButton) {
