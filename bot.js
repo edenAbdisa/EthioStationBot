@@ -38,7 +38,8 @@ function contactustouched(message){
       hotellist= hotellist+"\n"+"/"+ element.name;
       
     });
-    bot.sendMessage(message.chat.id,hotel);
+    bot.sendMessage(message.chat.id,hotellist);
+    console.log(hotellist);
   })
   .catch((err) => {
     console.log(err); 
