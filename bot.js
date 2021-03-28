@@ -30,9 +30,9 @@ const done = "Done";
 const uploadPicButton="Upload your tour pictures";
 var picmsg;
 var picture;
- function contactustouched(){
+async function contactustouched(){
   var res="0";
-   axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
+  await axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => { 
     res=response.statusText;
     console.log(response.data);
@@ -106,7 +106,7 @@ bot.on('message',(message)=>{
     return;
   }
   if(message.text==contact){
-      bot.sendMessage(message.chat.id,contactustouched());
+      bot.sendMessage(message.chat.id, axios.get("https://ethio-station-api.herokuapp.com/api/hotel").then(response => response.data));
       return;
   }
   if (message.text===hotelListButton) {
