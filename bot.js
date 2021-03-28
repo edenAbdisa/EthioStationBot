@@ -1,5 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
-const axios = require('axios').default; 
+const axios = require('axios'); 
 const express = require('express'); 
 const { response } = require('express');
 require('dotenv').config();
@@ -31,15 +31,26 @@ const uploadPicButton="Upload your tour pictures";
 var picmsg;
 var picture;
 const contactustouched=()=>{
+  var res="1";
+  axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
+  then(response => {
+    res=response;
+     
+  })
+  .catch((err) => {
+    console.log(err);
+    res="3";
+  }); 
   return(
-        "Phone: ,Email: "
+        res
   );
 }
 const getHotelList=()=>{
       var res="1";
       axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
       then(response => {
-        res= response  ;
+        res=response;
+         
       })
       .catch((err) => {
         console.log(err);
