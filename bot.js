@@ -31,23 +31,20 @@ const uploadPicButton="Upload your tour pictures";
 var picmsg;
 var picture;
 async function contactustouched(){
-  var res="1";
+  
   await axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {
-    res="response.data";
+    return response.data;
      
   })
   .catch((err) => {
     console.log(err);
-    res="3";
-  }); 
-  return(
-        res
-  );
+    return "3";
+  });  
 }
-async let  getHotelList=()=>{
+ getHotelList=()=>{
       var res="1";
-     await axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
+      axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
       then(function(response) {
         res=response.data;
          
@@ -107,7 +104,7 @@ bot.on('message',(message)=>{
     return;
   }
   if(message.text==contact){
-      bot.sendMessage(message.chat.id, contactustouched());
+      bot.sendMessage(message.chat.id,  contactustouched());
       return;
   }
   if (message.text===hotelListButton) {
