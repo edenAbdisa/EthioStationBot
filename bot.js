@@ -6,6 +6,9 @@ require('dotenv').config();
 const API_URL="https://ethio-station-api.herokuapp.com/api/";
 const token = process.env.TELEGRAM_TOKEN;
 let bot;
+const ex = express();
+ ex.use(express.json());
+
 if (process.env.NODE_ENV === 'production') {
    bot = new TelegramBot(token);
    bot.setWebHook(process.env.HEROKU_URL + bot.token);
@@ -106,7 +109,7 @@ bot.on('message',(message)=>{
     return;
   }
   if(message.text==contact){
-      bot.sendMessage(message.chat.id, axios.get("https://ethio-station-api.herokuapp.com/api/hotel").then(response => response.statusText) );
+      bot.sendMessage(message.chat.id,ex.get("https://ethio-station-api.herokuapp.com/api/hotel",(req,res) => req));
       return;
   }
   if (message.text===hotelListButton) {
