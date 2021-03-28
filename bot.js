@@ -34,7 +34,7 @@ function contactustouched(message){
   var res="0";
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {  
-    bot.sendMessage(message.chat.id,response.data);
+    bot.sendMessage(message.chat.id,response.data.toString());
   })
   .catch((err) => {
     console.log(err);
