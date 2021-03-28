@@ -107,7 +107,7 @@ bot.on('message',(message)=>{
     return;
   }
   if(message.text==contact){
-      bot.sendMessage(message.chat.id, async, contactustouched());
+      bot.sendMessage(message.chat.id, contactustouched());
       return;
   }
   if (message.text===hotelListButton) {
