@@ -32,9 +32,9 @@ var picmsg;
 var picture;
 const contactustouched=()=>{
   var res="1";
-  axios.get("https://ethio-station-api.herokuapp.com/api/hotel/").
+  axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {
-    res=response;
+    res=response.data;
      
   })
   .catch((err) => {
@@ -47,12 +47,12 @@ const contactustouched=()=>{
 }
 const getHotelList=()=>{
       var res="1";
-      axios.get("http://ethio-station-api.herokuapp.com/api/hotel").
-      then(response => {
-        res=response;
+      axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
+      then(function(response) {
+        res=response.data;
          
       })
-      .catch((err) => {
+      .catch(function(err) {
         console.log(err);
         res="3";
       }); 
