@@ -32,7 +32,7 @@ var picmsg;
 var picture;
 const contactustouched=()=>{
   var res="1";
-  axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
+  await axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {
     res="response.data";
      
