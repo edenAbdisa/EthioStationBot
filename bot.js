@@ -30,7 +30,7 @@ const done = "Done";
 const uploadPicButton="Upload your tour pictures";
 var picmsg;
 var picture;
-const async, contactustouched=()=>{
+async, contactustouched=()=>{
   var res="1";
   await axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {
@@ -45,7 +45,7 @@ const async, contactustouched=()=>{
         res
   );
 }
-const getHotelList=()=>{
+ getHotelList=()=>{
       var res="1";
       axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
       then(function(response) {
