@@ -31,18 +31,19 @@ const uploadPicButton="Upload your tour pictures";
 var picmsg;
 var picture;
 async function contactustouched(){
-  
+  var res="0";
   await axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => { 
-    console.log(response.statusText);
+    res=response.statusText;
     console.log(response.data);
-    return JSON.parse(response).statusText ;
+     JSON.parse(response).statusText ;
      
   })
   .catch((err) => {
     console.log(err);
-    return "3";
+    res="error";
   });  
+  return res;
 }
  getHotelList=()=>{
       var res="1";
