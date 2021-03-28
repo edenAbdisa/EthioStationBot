@@ -30,7 +30,7 @@ const done = "Done";
 const uploadPicButton="Upload your tour pictures";
 var picmsg;
 var picture;
-const contactustouched=()=>{
+const async, contactustouched=()=>{
   var res="1";
   await axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {
@@ -107,7 +107,7 @@ bot.on('message',(message)=>{
     return;
   }
   if(message.text==contact){
-      bot.sendMessage(message.chat.id,contactustouched());
+      bot.sendMessage(message.chat.id, async, contactustouched());
       return;
   }
   if (message.text===hotelListButton) {
