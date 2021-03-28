@@ -34,6 +34,7 @@ async function contactustouched(){
   
   await axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {
+    console.log(response);
     return response.data;
      
   })
@@ -46,14 +47,14 @@ async function contactustouched(){
       var res="1";
       axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
       then(function(response) {
-        res=response.data;
+        console.log(response);
+        return response.data;
          
       })
       .catch(function(err) {
         console.log(err);
-        res="3";
-      }); 
-      return(res);
+        return (err);
+      });  
 }
 const getResturantList=()=>{
     try{
