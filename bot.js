@@ -36,7 +36,6 @@ getHotelList=(message)=>{
       hotellist= hotellist+"\n"+element.id+" /"+ element.name;      
     });
     bot.sendMessage(message.chat.id,hotellist);
-    console.log(hotellist);
   })
   .catch((err) => {
     console.log(err); 
@@ -61,9 +60,11 @@ const getResturantList=()=>{
 }
 getHotelInfo=(message)=>{
   const hotelchoosen=message.text;
-  var hotelsplitted=hotelchoosen.split('/');
-  var hotelid=hotelsplitted[0];
-  var hotelname=hotelsplitted[1];
+  var hotelsplitted=hotelchoosen.split(' ');
+  var hotelid=hotelsplitted[0].replace(/\s/g, "");
+  var hotelname=hotelsplitted[1];  
+  console.log(hotelsplitted);
+  console.log(hotelid);
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel/"+hotelid).
   then(response => {  
     var tobeSent="Name: "+response.data.name+"\n Number of room: "+response.data.name+"\n Location: "+
