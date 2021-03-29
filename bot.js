@@ -41,26 +41,9 @@ getHotelList=(message)=>{
     console.log(err); 
   });  
 }
-const getResturantList=()=>{
-    try{
-      axios({
-      method: 'get',
-      url:  "https://ethio-station-api.herokuapp.com/api/resturant"
-    }).then((response) => {
-      return response.toString();  
-      }, (err) => {
-        console.log(err);
-        return(err.toString());
-    });
-    }catch(error){
-    console.log(error);
-    return(err.toString());
-    }
-    return("No List found");
-}
 getHotelInfo=(message)=>{
   const hotelchoosen=message.text;
-  var hotelsplitted=hotelchoosen.split(' ');
+  var hotelsplitted=hotelchoosen.split('/');
   var hotelid=hotelsplitted[0].trim().parseInt();
   var hotelname=hotelsplitted[1];  
   console.log(hotelsplitted);
@@ -74,10 +57,74 @@ getHotelInfo=(message)=>{
   .catch((err) => {
     console.log(err); 
   }); 
+}
+getResturantList=(message)=>{
+  var resturantlist="";
+  axios.get("https://ethio-station-api.herokuapp.com/api/resturant").
+  then(response => {   
+    response.data.forEach(element => {
+      resturantlist= resturantlist+"\n"+element.id+" /"+ element.name;      
+    });
+    bot.sendMessage(message.chat.id,resturantlist);
+  })
+  .catch((err) => {
+    console.log(err); 
+  }); 
+}
+getResturantInfo=(message)=>{
+  const resturantchoosen=message.text;
+  var resturantsplitted=resturantchoosen.split('/');
+  var resturantid=resturantsplitted[0].trim().parseInt();
+  var resturantname=resturantsplitted[1];  
+  console.log(resturantsplitted);
+  console.log(resturantid);
+  axios.get("https://ethio-station-api.herokuapp.com/api/resturant/"+resturantid).
+  then(response => {  
+    var tobeSent="Name: "+response.data.name+"\n For booking DM @hadid_adventures";
+    bot.sendMessage(message.chat.id,tobeSent); 
+  })
+  .catch((err) => {
+    console.log(err); 
+  }); 
+}
+getListOfTourGuide=(message)=>{
+  var guidelist="";
+  axios.get("https://ethio-station-api.herokuapp.com/api/tourguide").
+  then(response => {   
+    response.data.forEach(element => {
+      guidelist= guidelist+"\n"+element.id+" /"+ element.name;      
+    });
+    bot.sendMessage(message.chat.id,hotellist);
+  })
+  .catch((err) => {
+    console.log(err); 
+  });
+} 
+getTourGuideInfo=(message)=>{
+  const guidechoosen=message.text;
+  var guidesplitted=guidechoosen.split('/');
+  var guideid=guidesplitted[0].trim().parseInt();
+  var guidename=guidesplitted[1];  
+  console.log(guidesplitted);
+  console.log(guideid);
+  axios.get("https://ethio-station-api.herokuapp.com/api/tourguide/"+guideid).
+  then(response => {  
+    var tobeSent="Name: "+response.data.name+ "\n Contact: "+response.data.contact+"\n For booking DM @hadid_adventures";
+    bot.sendMessage(message.chat.id,tobeSent); 
+  })
+  .catch((err) => {
+    console.log(err); 
+  }); 
 } 
 bot.on('message',(message)=>{
   if(message.text.startsWith('/') && earlierAction==bookHotelButton){
     getHotelInfo(message);
+  }
+  if(message.text.startsWith('/') && earlierAction==getResturant){
+    getResturantInfo(message);
+  }
+  if(message.text.startsWith('/') && earlierAction==requestTourButton){
+    getTourGuideInfo(message);
   }
   if(message.text===""){
   	bot.sendMessage(message.chat.id, "Message cant be empty  send /start to start");
@@ -131,20 +178,20 @@ bot.on('message',(message)=>{
   if (message.text===bookHotelButton) {
     buttonTouched=true;
     earlierAction=bookHotelButton;
-    bot.sendMessage(message.chat.id,'Choose hotel from the list bellow');
+    bot.sendMessage(message.chat.id,'DM @hadid_adventures after choosing hotel from the list');
     return;
   }
   if (message.text===requestTourButton) {
     buttonTouched=true;
     earlierAction=requestTourButton;
-    bot.sendMessage(message.chat.id,'Send your trip location, budget and language prefernce');
+    getListOfTourGuide(message);
     return;
   }
  
  if (message.text===getResturant) {
     buttonTouched=true;
     earlierAction=getResturant;
-    bot.sendMessage(message.chat.id,getResturantList());
+    getResturantList(message);
     return;
   }
 
