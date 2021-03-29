@@ -61,7 +61,7 @@ const getResturantList=()=>{
 getHotelInfo=(message)=>{
   const hotelchoosen=message.text;
   var hotelsplitted=hotelchoosen.split(' ');
-  var hotelid=hotelsplitted[0].trim();
+  var hotelid=hotelsplitted[0].trim().parseInt();
   var hotelname=hotelsplitted[1];  
   console.log(hotelsplitted);
   console.log(hotelid);
