@@ -16,9 +16,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 var buttonTouched=false;
 var earlierAction="";
-var choosenHotelTobeBooked="";
 var pic;
-var hotelList;
 const bookHotelButton = "Book hotel";
 const hotelListButton = "Get List  of hotel";  
 const hikingButton = "Get List of Hiking events";  
@@ -29,14 +27,13 @@ const registerYourHikingEvent = "Register  your hiking event";
 const done = "Done";
 const uploadPicButton="Upload your tour pictures";
 var picmsg;
-var picture;
-function contactustouched(message){
+var datacache="";
+getHotelList=(message)=>{
   var hotellist="";
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
-  then(response => {  
+  then(response => {   
     response.data.forEach(element => {
-      hotellist= hotellist+"\n"+"/"+ element.name;
-      
+      hotellist= hotellist+"\n"+element.id+" /"+ element.name;      
     });
     bot.sendMessage(message.chat.id,hotellist);
     console.log(hotellist);
@@ -44,17 +41,6 @@ function contactustouched(message){
   .catch((err) => {
     console.log(err); 
   });  
-}
- getHotelList=(message)=>{
-      var res="1";
-      axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
-      then(function(response) {  
-        bot.sendMessage(message.chat.id,response.statusText);
-      })
-      .catch(function(err) {
-        console.log(err);
-        return (err);
-      });  
 }
 const getResturantList=()=>{
     try{
@@ -73,8 +59,25 @@ const getResturantList=()=>{
     }
     return("No List found");
 }
+getHotelInfo=(message)=>{
+  const hotelchoosen=message.text;
+  var hotelsplitted=hotelchoosen.split('/');
+  var hotelid=hotelsplitted[0];
+  var hotelname=hotelsplitted[1];
+  axios.get("https://ethio-station-api.herokuapp.com/api/hotel/"+hotelid).
+  then(response => {  
+    var tobeSent="Name: "+response.data.name+"\n Number of room: "+response.data.name+"\n Location: "+
+              response.data.location+"\n Contact: "+response.data.contact+"\n For booking DM @hadid_adventures";
+    bot.sendMessage(message.chat.id,tobeSent); 
+  })
+  .catch((err) => {
+    console.log(err); 
+  }); 
+} 
 bot.on('message',(message)=>{
-  
+  if(message.text.startsWith('/') && earlierAction==bookHotelButton){
+    getHotelInfo(message);
+  }
   if(message.text===""){
   	bot.sendMessage(message.chat.id, "Message cant be empty  send /start to start");
   	return;
@@ -105,7 +108,7 @@ bot.on('message',(message)=>{
     return;
   }
   if(message.text==contact){
-      contactustouched(message);
+    bot.sendMessage(message.chat.id,"+251940121548, https://www.facebook.com/hadidadventures ");
       return;
   }
   if (message.text===hotelListButton) {
