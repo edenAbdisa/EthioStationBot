@@ -117,7 +117,7 @@ getTourGuideInfo=(message)=>{
   }); 
 } 
 bot.on('message',(message)=>{
-  if(message.text.startsWith('/') && earlierAction==bookHotelButton){
+  if(message.text.startsWith('/') && earlierAction==hotelListButton){
     getHotelInfo(message);
   }
   if(message.text.startsWith('/') && earlierAction==getResturant){
