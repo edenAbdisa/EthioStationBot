@@ -29,8 +29,7 @@ const uploadPicButton="Upload your tour pictures";
 var picmsg;
 var hikingdetail="";
 var datacache="";
-getHotelList=(message)=>{
-  var hotellist="Hotel";
+getHotelList=(message)=>{ 
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {   
     response.data.forEach(element => {
