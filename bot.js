@@ -125,7 +125,7 @@ bot.on('message',(message)=>{
   var action= text.substr(0,actionindex+1);
   var itemtobebooked= text.substr(actionindex+1,);
   if(text.startsWith('/') && action==="bookhotel"){
-    var tobeSent="Sender: "+message.chat.id+ "Hotel chosen"+itemtobebooked;
+    var tobeSent="Sender: "+message.chat.id+ " "+message.from+ "Hotel chosen"+itemtobebooked;
     bot.sendMessage("@hadid_adventures",tobeSent);
     return;
   } 
