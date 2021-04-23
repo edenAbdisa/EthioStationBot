@@ -42,8 +42,9 @@ getHotelList=(message)=>{
     console.log(err); 
   });  
 }
-getHotelInfo=(message)=>{ 
-  var hotelname=message;   
+getHotelInfo=(message)=>{
+  const hotelchoosen=message.text;
+  var hotelname=hotelchoosen.substr(3,);   
   console.log(hotelname); 
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel/name/"+hotelname).
   then(response => {  
@@ -112,7 +113,7 @@ bot.on('message',(message)=>{
   var type=text[1];
   console.log(type);
   if(text.startsWith('/') && type==="h"){
-    getHotelInfo(text.substr(3,));
+    getHotelInfo(message);
   }
   if(text.startsWith('/') && type==="Resturant"){
     getResturantInfo(message);
