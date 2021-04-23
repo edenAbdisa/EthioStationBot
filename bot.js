@@ -112,13 +112,14 @@ bot.on('message',(message)=>{
   var text= message.text;
   var newlineindex = text.indexOf('\n');
   var type=text.slice(0,newlineindex);
-  if(text.startsWith('/') && type=="Hotel"){
+  console.log(type);
+  if(text.startsWith('/') && type==="Hotel"){
     getHotelInfo(message);
   }
-  if(text.startsWith('/') && type=="Resturant"){
+  if(text.startsWith('/') && type==="Resturant"){
     getResturantInfo(message);
   }
-  if(text.startsWith('/') && type=="Tour Guide"){
+  if(text.startsWith('/') && type==="Tour Guide"){
     getTourGuideInfo(message);
   }
   if(text===""){
