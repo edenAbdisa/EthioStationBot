@@ -110,7 +110,7 @@ getTourGuideInfo=(message)=>{
 } 
 bot.on('message',(message)=>{
   var text= message.text;
-  var newlineindex = text.indexOf("\n");
+  var newlineindex = text.search(/\n/);
   var type=text.slice(0,newlineindex);
   console.log(type);
   if(text.startsWith('/') && type==="Hotel"){
