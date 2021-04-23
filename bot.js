@@ -33,7 +33,7 @@ getHotelList=(message)=>{
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {   
     response.data.forEach(element => {
-      hotellist= hotellist+"\n"+element.id+" /"+ element.name+ " \\[hotel\\]";      
+      hotellist= hotellist+"\n"+element.id+" /"+ element.name+ " [hotel]";      
     });
     bot.sendMessage(message.chat.id,hotellist);
   })
@@ -109,8 +109,8 @@ getTourGuideInfo=(message)=>{
 } 
 bot.on('message',(message)=>{
   var text= message.text;
-  var startfortype = text.search("[");
-  var endfortype = text.search("]");
+  var startfortype = text.search("\\[");
+  var endfortype = text.search("\\]");
   var type=text.slice(startfortype+1,endfortype);
   console.log(type);
   if(text.startsWith('/') && type==="hotel"){
