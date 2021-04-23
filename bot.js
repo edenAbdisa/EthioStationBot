@@ -30,6 +30,7 @@ var picmsg;
 var hikingdetail="";
 var datacache="";
 getHotelList=(message)=>{ 
+  var hotellist="";
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {   
     response.data.forEach(element => {
