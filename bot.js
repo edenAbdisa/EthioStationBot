@@ -33,7 +33,7 @@ getHotelList=(message)=>{
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {   
     response.data.forEach(element => {
-      hotellist= hotellist+"\n"+element.id+" /"+ element.name+ " [hotel]";      
+      hotellist= hotellist+"\n"+element.id+" /"+ element.name+ " \\[hotel\\]";      
     });
     bot.sendMessage(message.chat.id,hotellist);
   })
