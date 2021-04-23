@@ -48,8 +48,8 @@ getHotelInfo=(message)=>{
   console.log(hotelname); 
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel/name/"+hotelname).
   then(response => {  
-    var tobeSent="Name: "+response.data.name+"\n Number of room: "+response.data.name+"\n Location: "+
-              response.data.location+"\n Contact: "+response.data.contact+"\n For booking DM @hadid_adventures";
+    var tobeSent="Name: "+response.data.name+"\nNumber of room: "+response.data.name+"\nLocation: "+
+              response.data.location+"\nContact: +251940121548"+"\nFor booking DM @hadid_adventures"+"/bookhotel_"+response.data.name;
     bot.sendMessage(message.chat.id,tobeSent); 
   })
   .catch((err) => {
@@ -121,6 +121,14 @@ bot.on('message',(message)=>{
   if(text.startsWith('/') && type==="Tour Guide"){
     getTourGuideInfo(message);
   }
+  var actionindex= text.search("\\_");
+  var action= text.substr(0,actionindex+1);
+  var itemtobebooked= text.substr(actionindex+1,);
+  if(text.startsWith('/') && action==="bookhotel"){
+    var tobeSent="Sender: "+message.chat.id+ "Hotel chosen"+itemtobebooked;
+    bot.sendMessage("@hadid_adventures",tobeSent);
+    return;
+  } 
   if(text===""){
   	bot.sendMessage(message.chat.id, "Message cant be empty  send /start to start");
   	return;
