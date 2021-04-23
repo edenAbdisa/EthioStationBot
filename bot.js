@@ -34,7 +34,7 @@ getHotelList=(message)=>{
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {   
     response.data.forEach(element => {
-      hotellist= hotellist+"\n"+element.id+" /"+ element.name+ " [hotel]";      
+      hotellist= hotellist+"\n"+element.id+" /h_"+ element.name;      
     });
     bot.sendMessage(message.chat.id,hotellist);
   })
@@ -42,9 +42,8 @@ getHotelList=(message)=>{
     console.log(err); 
   });  
 }
-getHotelInfo=(message)=>{
-  const hotelchoosen=message.text;
-  var hotelname=hotelchoosen.substring(1);   
+getHotelInfo=(message)=>{ 
+  var hotelname=message;   
   console.log(hotelname); 
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel/name/"+hotelname).
   then(response => {  
@@ -109,13 +108,11 @@ getTourGuideInfo=(message)=>{
   }); 
 } 
 bot.on('message',(message)=>{
-  var text= message.text;
-  var startfortype = text.search("\\[");
-  var endfortype = text.search("\\]");
-  var type=text.slice(startfortype+1,endfortype);
+  var text= message.text; 
+  var type=text[1];
   console.log(type);
-  if(text.startsWith('/') && type==="hotel"){
-    getHotelInfo(message);
+  if(text.startsWith('/') && type==="h"){
+    getHotelInfo(text.substr(3,));
   }
   if(text.startsWith('/') && type==="Resturant"){
     getResturantInfo(message);
