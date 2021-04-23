@@ -30,7 +30,7 @@ var picmsg;
 var hikingdetail="";
 var datacache="";
 getHotelList=(message)=>{
-  var hotellist="";
+  var hotellist="Hotel";
   axios.get("https://ethio-station-api.herokuapp.com/api/hotel").
   then(response => {   
     response.data.forEach(element => {
@@ -109,20 +109,23 @@ getTourGuideInfo=(message)=>{
   }); 
 } 
 bot.on('message',(message)=>{
-  if(message.text.startsWith('/') && earlierAction==hotelListButton){
+  var text= message.text;
+  var newlineindex = text.indexOf('\n');
+  var type=text.slice(0,newlineindex);
+  if(text.startsWith('/') && type=="Hotel"){
     getHotelInfo(message);
   }
-  if(message.text.startsWith('/') && earlierAction==getResturant){
+  if(text.startsWith('/') && type=="Resturant"){
     getResturantInfo(message);
   }
-  if(message.text.startsWith('/') && earlierAction==requestTourButton){
+  if(text.startsWith('/') && type=="Tour Guide"){
     getTourGuideInfo(message);
   }
-  if(message.text===""){
+  if(text===""){
   	bot.sendMessage(message.chat.id, "Message cant be empty  send /start to start");
   	return;
   }
-  if (message.text && message.text === "/start"){
+  if (text && text === "/start"){
   	
   	bot.sendMessage(message.chat.id, "Welcome ,Press the buttons to send the message that you want."
   		, {
@@ -133,47 +136,47 @@ bot.on('message',(message)=>{
         });
   	return;
   }
-  if(message.text==contact){
+  if(text==contact){
     bot.sendMessage(message.chat.id,"+251940121548, https://www.facebook.com/hadidadventures ");
       return;
   }
-  if (message.text===hotelListButton) {
+  if (text===hotelListButton) {
     buttonTouched=true;
     earlierAction=hotelListButton;
     getHotelList(message); 
     return;
   }  
-  if (message.text==="/uploadHikingInfo") {
+  if (text==="/uploadHikingInfo") {
     buttonTouched=true;
     earlierAction=uploadPicButton;
     bot.sendMessage(message.chat.id,"your hiking will be registered once approved by admin");
     return;
   }
-  if (message.text===bookHotelButton) {
+  if (text===bookHotelButton) {
     buttonTouched=true;
     earlierAction=hotelListButton;
     getHotelList(message);
     return;
   }
-  if (message.text===requestTourButton) {
+  if (text===requestTourButton) {
     buttonTouched=true;
     earlierAction=requestTourButton;
     getListOfTourGuide(message);
     return;
   }
-  if (message.text===registerYourHikingEvent) {
+  if (text===registerYourHikingEvent) {
     buttonTouched=true;
     earlierAction=registerYourHikingEvent;
     bot.sendMessage(message.chat.id,"Send the name of the organizer,hiking day,location,contact,name of the person registering this event,price of the hiking. Please dont mess up the order.");
     return;
   }
- if (message.text===getResturant) {
+ if (text===getResturant) {
     buttonTouched=true;
     earlierAction=getResturant;
     getResturantList(message);
     return;
   }
-  if (message.text===done) {
+  if (text===done) {
      
     bot.sendPhoto('EthioStation',pic,{caption : '🏢  Place: '
     	 , "reply_markup": {
